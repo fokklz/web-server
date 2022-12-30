@@ -6,15 +6,15 @@ working_dir="/opt/web-server"
 cd $working_dir
 
 # include config
-source "$working_dir/scripts/config.sh"
+source "$working_dir/webctl/scripts/config.sh"
 # include core functions
-source "$working_dir/scripts/core.sh"
+source "$working_dir/webctl/scripts/core.sh"
 # include webpage functions
-source "$working_dir/scripts/webpage.sh"
+source "$working_dir/webctl/scripts/webpage.sh"
 # include wordpress functions
-source "$working_dir/scripts/wordpress.sh"
+source "$working_dir/webctl/scripts/wordpress.sh"
 # include wordpress-yml functions
-source "$working_dir/scripts/wordpress-yml.sh"
+source "$working_dir/webctl/scripts/wordpress-yml.sh"
 
 delete_webpage(){
     mkdir -p $deleted_dir
