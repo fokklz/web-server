@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.21.6
+    network_mode: host
+    volumes:
+      - ./config:/etc/nginx
+      - ./logs:/var/log/nginx
+      - ./data/certbot/letsencrypt:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+      - ./pages:/var/www/pages:ro
