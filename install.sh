@@ -55,6 +55,8 @@ chmod +x webctl.sh
 # rechte für die globale ausführungs datei definieren
 chmod +x "/usr/local/bin/webctl"
 
+mkdir -p "config/sites-enabled"
+
 clear
 # ausgabe einer kleinen Zusammenfassung
 echo " ---- Installation Erfolgreich ---- "
