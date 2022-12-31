@@ -35,5 +35,5 @@ webctl [1|2] [domain] [config-name] [subdomains (comma seperated)]
 
 `Löschung einer seite`
 ```shell
-webctl 3 [config-name]
+webctl [3] [config-name]
 ```
