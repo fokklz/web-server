@@ -29,6 +29,9 @@ config_base_dir="webctl/configs"
 wordpress_base_dir="wordpress"
 EOM
 
+# dhparams erstellen
+openssl dhparam 4096 > "config/dhparams.pem"
+
 # sollte die docker compose umgebung noch nicht laufen, wir diese gestartet
 docker compose up -d
 
@@ -38,6 +41,7 @@ echo "0 0 * * * docker run --rm --name certbot -v "$working_dir/data/certbot/let
 crontab mycron
 rm mycron
 
+# working dir an die datei anhängen
 webctl=$(< webctl.sh)
 cat > "webctl.sh" <<- EOM
 #!/bin/bash
@@ -52,12 +56,13 @@ chmod +x webctl.sh
 chmod +x "/usr/local/bin/webctl"
 
 clear
+# ausgabe einer kleinen Zusammenfassung
 echo " ---- Installation Erfolgreich ---- "
 echo ""
 echo ""
 echo "Das Skript ist nun bereit für die verwendung und wurde Global auf dem Server installiert."
 echo "Zertifikate werden mit der email $email erstellt, und automatisch ueber Cronjobs erneuert."
-echo "Starte sofort mit: 'webctl' um dir eine Hilfe anzeigen zu lassen."
+echo "Starte sofort mit: 'webctl' um zu beginnen"
 echo ""
 echo "Danke für dein Vertrauen!"
 echo ""
