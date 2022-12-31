@@ -4,6 +4,7 @@ services:
   nginx:
     image: nginx:1.21.6
     network_mode: host
+    container_name: nginx
     volumes:
       - ./config:/etc/nginx
       - ./logs:/var/log/nginx

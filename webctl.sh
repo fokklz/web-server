@@ -1,8 +1,14 @@
 #!/bin/bash
-# ./create.sh 1 f-ibz.xyz f-ibz lol.com,haha.com,rofel.ch
+# Author: Fokko Vos
+# Skript: webctl.sh
+# Beschreibung: Dieses Skript binhaltet die Erstellung von Simplen Webseiten, sowie eine minimale Löschfunktion
 
-# absolute working path
-working_dir="/opt/web-server"
+if [ -f "install.sh" ]; then
+    echo "Das Skript kann nicht ausgeführt werden sollange die Installation nicht vorgenommen wurde"
+    exit 0
+fi
+
+#working_dir=$(pwd)
 cd $working_dir
 
 # include config
@@ -35,11 +41,8 @@ delete_wordpress(){
     rm "webctl/stop_${domain_config}.sh"
 }
 
-# ueberpruefen das der nginx server nicht laueft
-if [ -z `docker ps -q --no-trunc | grep $(docker-compose ps -q nginx)` ]; then
-    # starten, da das skript nur mit laufender nginx instanz fehlerfrei funktionieren kann
-    docker-compose up -d
-fi
+# sollte die docker compose umgebung noch nicht laufen, wir diese gestartet
+docker compose up -d
 
 user_menu $1
 case "$action" in

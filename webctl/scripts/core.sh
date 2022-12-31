@@ -14,7 +14,7 @@ user_menu(){
     fi
 
     # alle nicht nummerischen zeichen von der eingabe entfernen
-    action=${action//[!0-9]/}
+    action=${action//[!0-9]/:-0}
 
     # sicherstellen das die einhabe nicht ueber 3 liegt, da wir nicht mehr als 3 Optionen haben
     if [ "$action" -gt 3 ]; then
@@ -37,6 +37,9 @@ user_menu(){
         ;;
         "3")
             type="Delete"
+        ;;
+        *)
+            type="ANY"
         ;;
     esac
 }
