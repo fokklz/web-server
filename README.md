@@ -1,4 +1,4 @@
-# WebCTL
+# Web-Server
 
 Entstanden im rahmen eines Schulprojekts.
 
@@ -14,6 +14,11 @@ Das Skript hat 3 aktionen welche es ausführen kann:
 wenn das Respository geclont wurde kann die install.sh welche sich im Hauptordner befindet dazu genutzt werden alle benötigten einstellungen für das Skript vorzunehmen, wie das anpassen von Rechten oder erstellen von Cronjobs.
 
 Mit dem Installations Skript wird der befehl "webctl" global auf dem Server eingerichtet und kann unabhängig vom Ordner ausgeführt werden.
+
+`One-Line installation` 
+```shell
+apt update && apt upgrade - y && apt install git curl -y && curl -sSL https://get.docker.com/ | CHANNEL=stable sh && systemctl enable --now docker && cd /opt && https://github.com/fokklz/web-server.git && cd web-server && chmod +x install.sh && ./install.sh
+```
 
 `Vor der Installation sollte man sich in den geclonten ordner begeben auf die tree ebene der install.sh`
 
