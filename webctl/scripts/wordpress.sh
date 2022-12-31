@@ -12,18 +12,18 @@ level_wordpress_port(){
 # start und stop dateien erstellen und starten
 setup_wordpress(){
     # erstellen einer start-sh fuer einfaches starten
-    cat > "webctl/start_${domain_config}.sh" <<- EOM
+    cat > "$working_dir/webctl/start_${domain_config}.sh" <<- EOM
 cd $working_dir/$wordpress_dir
 docker compose up -d
 EOM
     # erstellen einer stop-sh fuer einfaches beenden
-    cat > "webctl/stop_${domain_config}.sh" <<- EOM
+    cat > "$working_dir/webctl/stop_${domain_config}.sh" <<- EOM
 cd $working_dir/$wordpress_dir
 docker compose down
 EOM
     # rechte aktualiaieren um das ausfuehren zu gestatten
-    chmod +x "webctl/start_${domain_config}.sh"
-    chmod +x "webctl/stop_${domain_config}.sh"
+    chmod +x "$working_dir/webctl/start_${domain_config}.sh"
+    chmod +x "$working_dir/webctl/stop_${domain_config}.sh"
 }
 
 # erweitert die aktuelle NGINX konfiguration

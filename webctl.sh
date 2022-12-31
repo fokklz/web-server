@@ -24,21 +24,21 @@ source "$working_dir/webctl/scripts/wordpress-yml.sh"
 
 delete_webpage(){
     mkdir -p $deleted_dir
-    mv "$working_dir/$nginx_config" "${deleted_dir}nginx.conf"
-    mv "$working_dir/$config_file" "${deleted_dir}webctl.conf"
-    mv "$working_dir/$pages_dir" "${deleted_dir}web-data"
+    mv "$nginx_config" "${deleted_dir}nginx.conf"
+    mv "$config_file" "${deleted_dir}webctl.conf"
+    mv "$pages_dir" "${deleted_dir}web-data"
 }
     
 delete_wordpress(){
     mkdir -p $deleted_dir
-    mv "$working_dir/$nginx_config" "${deleted_dir}nginx.conf"
-    mv "$working_dir/$config_file" "${deleted_dir}webctl.conf"
+    mv "$nginx_config" "${deleted_dir}nginx.conf"
+    mv "$config_file" "${deleted_dir}webctl.conf"
     cd $wordpress_dir
     docker compose down
     cd $working_dir
-    mv "$working_dir/$wordpress_dir" "${deleted_dir}wordpress_data"
-    rm "webctl/start_${domain_config}.sh"
-    rm "webctl/stop_${domain_config}.sh"
+    mv "$wordpress_dir" "${deleted_dir}wordpress_data"
+    rm "$working_dir/webctl/start_${domain_config}.sh"
+    rm "$working_dir/webctl/stop_${domain_config}.sh"
 }
 
 # sollte die docker compose umgebung noch nicht laufen, wir diese gestartet
@@ -69,7 +69,6 @@ case "$action" in
     # config fuer die nachvollziehbarkeit schreiben
     # wird beim löschvorgang verwendet
     write_config
-
     print_final
     ;;
     "2")
@@ -106,12 +105,10 @@ case "$action" in
     # config fuer die nachvollziehbarkeit schreiben
     # wird beim löschvorgang verwendet
     write_config
-
+    print_final
     # wordpress starten
     cd $wordpress_dir
     docker compose up -d
-
-    print_final
     ;;
     "3")
     # (Delete)

@@ -68,7 +68,7 @@ read_domain() {
 add_one_if_exists(){
     local name=$1
     local num=$2
-    if [ -f "$config_base_dir/${name}_${num}.conf" ]; then
+    if [ -f "$working_dir/$config_base_dir/${name}_${num}.conf" ]; then
         add_one_if_exists $name $((num+1))
     else
         domain_config="${name}_${num}"
@@ -107,7 +107,7 @@ read_config_name() {
         build_vars
     else
         # ueberprueft ob die konfiguration bereits exisitiert
-        if [ -f "$config_base_dir/$domain_config.conf" ]; then
+        if [ -f "$working_dir/$config_base_dir/$domain_config.conf" ]; then
             # zaehlen den namen fuer die config hoch wenn er bereits existiert
             add_one_if_exists $domain_config 1
         fi
@@ -137,23 +137,23 @@ read_subdomains() {
 # erstellt alle benötigten variabeln
 build_vars(){
     # konfigurations datei fuer die seite
-    config_file="$config_base_dir/$domain_config.conf"
+    config_file="$working_dir/$config_base_dir/$domain_config.conf"
     # nginx konfiguration fuer die seite
-    nginx_config="config/sites-enabled/$domain_config.conf"
+    nginx_config="$working_dir/config/sites-enabled/$domain_config.conf"
 
     # for files (relative)
-    pages_dir="pages/$domain_config"
+    pages_dir="$working_dir/pages/$domain_config"
     # wordpress daten
-    wordpress_dir="$wordpress_base_dir/$domain_config"
+    wordpress_dir="$working_dir/$wordpress_base_dir/$domain_config"
     # wordpress port
-    wordpress_port_file="$wordpress_base_dir/port"
+    wordpress_port_file="$working_dir/$wordpress_base_dir/port"
     # ordner wo der gelöschte inhanlt hin soll
-    deleted_dir="webctl/deleted/${domain_config}_${current_time}_${type,,}/"
+    deleted_dir="$working_dir/webctl/deleted/${domain_config}_${current_time}_${type,,}/"
 }
 
 write_initial_config(){
-    mkdir -p $config_base_dir
-    printf -v date '%(%Y-%m-%d %H:%M:%S)T\n' -1 
+    mkdir -p "$working_dir/$config_base_dir"
+    printf -v date '%(%Y-%m-%d %H:%M:%S)T' -1 
     cat > $config_file <<- EOM
 domain=$domain
 domain_config=$domain_config
@@ -266,7 +266,7 @@ generate_cert(){
 # hilft beim löschen eines Zertifikates
 delete_cert(){
     # erstellt einen docker continer, welcher das zertifikat löscht und sich anschliessend selber beendet
-    run_certbot delete --cert-name $domain
+    run_certbot delete --cert-name $domain --force-renewal --non-interactive
 }
 
 # hilft beim erstellen der basis config fuer NGINX (benötigt fuer das SSL Zertifikat)
