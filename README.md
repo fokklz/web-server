@@ -11,20 +11,14 @@ Das Skript hat 3 aktionen welche es ausführen kann:
 
 # Installation
 
-wenn das Respository geclont wurde kann die install.sh welche sich im Hauptordner befindet dazu genutzt werden alle benötigten einstellungen für das Skript vorzunehmen, wie das anpassen von Rechten oder erstellen von Cronjobs.
+Mit dem Installations befehl werden alle nötigen abhängigkeiten sowie das skript installiert, der standard installationsordner ist "/opt" mit dem finalen pfad "/opt/web-sever". Der befehl webctl kann von überall verwendet werden und erstellt die projekte in den Entsprechenden ordnern innerhalb des ROOT-Ordners
 
-Mit dem Installations Skript wird der befehl "webctl" global auf dem Server eingerichtet und kann unabhängig vom Ordner ausgeführt werden.
-
-`One-Line installation` 
+`Installiert: Curl | Git | Docker | Webctl (dieses script)`
 ```shell
 apt update && apt upgrade -y && apt install git curl -y && curl -sSL https://get.docker.com/ | CHANNEL=stable sh && systemctl enable --now docker && cd /opt && git clone https://github.com/fokklz/web-server.git && cd web-server && chmod +x install.sh && ./install.sh
 ```
 
-`Vor der Installation sollte man sich in den geclonten ordner begeben auf die tree ebene der install.sh`
-
-```shell
-chmod +x install.sh && ./install.sh
-```
+Sollte die Domain auf den Server führen kann direkt mit der start konfiguration losgelegt werden da die NGINX instanz an die IP `0.0.0.0` gebunden wird.
 
 # Nutzung
 
