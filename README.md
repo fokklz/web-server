@@ -17,7 +17,7 @@ Mit dem Installations Skript wird der befehl "webctl" global auf dem Server eing
 
 `One-Line installation` 
 ```shell
-apt update && apt upgrade - y && apt install git curl -y && curl -sSL https://get.docker.com/ | CHANNEL=stable sh && systemctl enable --now docker && cd /opt && https://github.com/fokklz/web-server.git && cd web-server && chmod +x install.sh && ./install.sh
+apt update && apt upgrade -y && apt install git curl -y && curl -sSL https://get.docker.com/ | CHANNEL=stable sh && systemctl enable --now docker && cd /opt && https://github.com/fokklz/web-server.git && cd web-server && chmod +x install.sh && ./install.sh
 ```
 
 `Vor der Installation sollte man sich in den geclonten ordner begeben auf die tree ebene der install.sh`
